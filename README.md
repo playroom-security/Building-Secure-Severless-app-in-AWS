@@ -7,29 +7,29 @@ A production-ready, secure-by-default serverless application built on AWS, fully
 ## Architecture
 
 ```
-                          ┌─────────────────────────────────────┐
+                          ┌─────────────────────────────────────-┐
   Browser / Client        │             AWS Cloud                │
   ─────────────────       │                                      │
                           │  ┌───────────┐                       │
   1. Login via            │  │  Cognito  │  Hosted UI            │
      Hosted UI  ─────────►│  │ User Pool │  JWT tokens           │
                           │  └─────┬─────┘                       │
-  2. Call API with JWT    │        │ JWT authorizer               │
+  2. Call API with JWT    │        │ JWT authorizer              │
      ─────────────────────┼──►┌────▼──────┐                      │
-                          │   │    WAF    │  Managed rules        │
+                          │   │    WAF    │  Managed rules       │
                           │   │  Web ACL  │  (OWASP/SQLi/IP rep) │
                           │   └────┬──────┘                      │
-                          │        │ filtered traffic             │
+                          │        │ filtered traffic            │
                           │   ┌────▼──────────┐                  │
                           │   │  API Gateway  │  HTTP API        │
                           │   │  (HTTP API)   │  JWT authorizer  │
                           │   └────┬──────────┘                  │
-                          │        │ AWS_PROXY                    │
+                          │        │ AWS_PROXY                   │
                           │   ┌────▼──────┐                      │
                           │   │  Lambda   │  Python 3.12         │
                           │   │ Function  │  Least-privilege IAM │
                           │   └────┬──────┘                      │
-                          │        │ GetItem / PutItem            │
+                          │        │ GetItem / PutItem           │
                           │   ┌────▼──────┐                      │
                           │   │ DynamoDB  │  Encrypted, PITR     │
                           │   │   Table   │  TTL, SSE            │
@@ -39,7 +39,7 @@ A production-ready, secure-by-default serverless application built on AWS, fully
                           │  │  CloudTrail   │  Multi-region     │
                           │  │  (all events) │  S3 + CW Logs     │
                           │  └───────────────┘                   │
-                          └─────────────────────────────────────┘
+                          └─────────────────────────────────────-┘
 ```
 
 ### Components
