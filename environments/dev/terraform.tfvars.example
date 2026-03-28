@@ -1,0 +1,14 @@
+# ---------------------------------------------------------------------------
+# Dev environment — fill in values before running terraform apply
+# Copy this file to terraform.tfvars (gitignored) and populate secrets
+# ---------------------------------------------------------------------------
+
+aws_region     = "us-east-1"
+app_name       = "secure-serverless"
+aws_account_id = "REPLACE_WITH_YOUR_ACCOUNT_ID"
+
+# Must be globally unique, lowercase alphanumeric and hyphens only
+cognito_domain_prefix = "secure-serverless-dev-REPLACE"
+
+cognito_callback_urls = ["https://localhost:3000/callback"]
+cognito_logout_urls   = ["https://localhost:3000/logout"]
